@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   ImageBackground,
@@ -7,14 +7,24 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-} from 'react-native';
-import Background from '../../../assets/Background.jpg';
-import Book from '../../../assets/Book.png';
-import Sim from '../../../assets/Vector.png';
-import { sizing } from '../../utils/style';
+} from "react-native";
+import Background from "../../../assets/Background.jpg";
+import Book from "../../../assets/Book.png";
+import Sim from "../../../assets/Vector.png";
+import { auth } from "../../../firebase";
+import { sizing } from "../../utils/style";
 
 const Dashboard = ({ navigation }) => {
-  const logo = { uri: 'http://unipma.ac.id/images/logo.png' };
+  const logo = { uri: "http://unipma.ac.id/images/logo.png" };
+
+  const logout = () => {
+    auth
+      .signOut()
+      .then(() => {
+        navigation.replace("Login");
+      })
+      .catch((error) => alert(error.message));
+  };
 
   return (
     <View>
@@ -22,7 +32,8 @@ const Dashboard = ({ navigation }) => {
         <ImageBackground
           source={Background}
           style={styles.imgBg}
-          resizeMode="cover">
+          resizeMode="cover"
+        >
           <View style={{ marginTop: sizing.xxl }}>
             <View style={styles.header}>
               <Image source={logo} style={styles.logo} />
@@ -30,14 +41,14 @@ const Dashboard = ({ navigation }) => {
               <Text style={styles.unipma}>Universitas PGRI Madiun</Text>
             </View>
             <View style={styles.lineHeader} />
-            <View style={{ backgroundColor: '#EEEEEE' }}>
-              <View style={{ justifyContent: 'center', flexDirection: 'row' }}>
+            <View style={{ backgroundColor: "#EEEEEE" }}>
+              <View style={{ justifyContent: "center", flexDirection: "row" }}>
                 <TouchableOpacity>
                   <View style={styles.headerMenu}>
                     <Text style={styles.headerButton}>Ganti Kata Sandi</Text>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={logout}>
                   <View style={styles.headerMenu}>
                     <Text style={styles.headerButton}>Logout</Text>
                   </View>
@@ -48,10 +59,8 @@ const Dashboard = ({ navigation }) => {
                 <View>
                   <TouchableOpacity>
                     <View
-                      style={[
-                        styles.container,
-                        { backgroundColor: '#0C1845' },
-                      ]}>
+                      style={[styles.container, { backgroundColor: "#0C1845" }]}
+                    >
                       <Text style={styles.contentText}>SIM Akademik</Text>
                       <Image
                         source={Sim}
@@ -59,12 +68,13 @@ const Dashboard = ({ navigation }) => {
                       />
                     </View>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() => navigation.navigate('Elma')}>
+                  <TouchableOpacity onPress={() => navigation.navigate("Elma")}>
                     <View
                       style={[
                         styles.container,
-                        { backgroundColor: '#0C81F6', marginBottom: 30 },
-                      ]}>
+                        { backgroundColor: "#0C81F6", marginBottom: 30 },
+                      ]}
+                    >
                       <Text style={styles.contentText}>
                         eLMA (e-Learning unipma)
                       </Text>
@@ -83,8 +93,9 @@ const Dashboard = ({ navigation }) => {
                 <View
                   style={[
                     styles.container,
-                    { backgroundColor: '#3D5AF1', marginLeft: sizing.xl },
-                  ]}>
+                    { backgroundColor: "#3D5AF1", marginLeft: sizing.xl },
+                  ]}
+                >
                   <Text style={styles.contentText}>Sister UNIPMA</Text>
                   <Text style={styles.subContentText}>
                     Sistem Informasi Sumberdaya Terintegrasi Universitas PGRI
@@ -102,14 +113,14 @@ const Dashboard = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   imgBg: {
-    widht: '100%',
-    height: '100%',
-    alignItems: 'center',
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
   },
   header: {
-    backgroundColor: '#000',
+    backgroundColor: "#000",
     width: 300,
-    alignItems: 'center',
+    alignItems: "center",
   },
   logo: {
     height: 90,
@@ -117,41 +128,41 @@ const styles = StyleSheet.create({
     marginVertical: sizing.lg,
   },
   SIM: {
-    color: '#FFF',
+    color: "#FFF",
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: sizing.md,
   },
   unipma: {
-    color: '#FFF',
+    color: "#FFF",
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: sizing.lg,
   },
   lineHeader: {
-    backgroundColor: '#FFD705',
+    backgroundColor: "#FFD705",
     width: 300,
     height: 4,
   },
   headerMenu: {
     height: 35,
     width: 130,
-    backgroundColor: '#C4C4C4',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#C4C4C4",
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: sizing.md,
     marginBottom: sizing.lg,
   },
   headerButton: {
-    color: '#373232',
+    color: "#373232",
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   mainContent: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   modul: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 20,
     marginBottom: sizing.md,
   },
@@ -165,19 +176,19 @@ const styles = StyleSheet.create({
     top: 10,
   },
   contentText: {
-    color: '#FFF',
+    color: "#FFF",
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: sizing.lg,
     marginLeft: sizing.md,
   },
   footer: {
-    backgroundColor: '#FFF',
+    backgroundColor: "#FFF",
     paddingBottom: sizing.xl,
     marginBottom: sizing.xl,
   },
   contentAccess: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 20,
     marginLeft: sizing.xl,
     marginTop: sizing.lg,
@@ -185,7 +196,7 @@ const styles = StyleSheet.create({
   subContentText: {
     marginTop: sizing.md,
     marginLeft: sizing.md,
-    color: '#FFF',
+    color: "#FFF",
   },
 });
 

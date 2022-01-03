@@ -1,21 +1,25 @@
-import React from 'react';
-import { View } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import Login from '../components/Login/Login';
-import Dashboard from '../components/Dashboard/Dashboard';
-import Elma from '../components/Elma/Elma';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import Login from "../components/Login/Login";
+import Dashboard from "../components/Dashboard/Dashboard";
+import Elma from "../components/Elma/Elma";
+import Register from "../components/Register/Register";
 
-const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
-        <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="Dashboard" component={Dashboard} />
-        <Drawer.Screen name="Elma" component={Elma} />
-      </Drawer.Navigator>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen name="Elma" component={Elma} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
