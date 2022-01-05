@@ -1,3 +1,5 @@
-# Aplikasi login dengan bantuan firebase
+# Login Auth using Firebase
 
-Gatau gimana jelasinnya
+Aplikasi kloningan sistem akademik mahasiswa UNIPMA, berikut demo dari aplikasi tersebut:
+
+![Demo](assets/Login.gif)
